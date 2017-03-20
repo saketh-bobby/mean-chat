@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="jumbotron">
+		<!-- todo:make form small ue nested states for both login and signup later-->
+		<div class="alert alert-danger" ng-repeat="message in vm.messages">{{ message }}</div>
+		<form ng-submit="vm.signup()">
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" class="form-control" ng-model="vm.email">
+			</div>
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" class="form-control" ng-model="vm.username">
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" class="form-control" ng-model="vm.password">
+			</div>
+			<button type="submit" class="btn btn-primary pull-right" >Sign Up!</button>
+		</form>
+	</div>
+
+</div>

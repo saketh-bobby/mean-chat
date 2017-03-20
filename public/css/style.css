@@ -1,0 +1,20 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.chat-form {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.chat-form #chat-box{
+    width:90%;
+}
+.chat-form button{
+    width:5%;
+}
