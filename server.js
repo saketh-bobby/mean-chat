@@ -1,7 +1,5 @@
 var express = require('express');
 var app     = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
 
 //env config here
 require('dotenv').config();
@@ -26,9 +24,9 @@ app.use('/auth', authRouter);
 app.use('/app', appRouter);
 
 
-// app.use('*', function (req, res) {
-// 	res.redirect('/');
-// });
+app.use('*', function (req, res) {
+	res.redirect('/');
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

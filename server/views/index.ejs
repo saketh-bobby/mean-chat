@@ -9,45 +9,7 @@
     </head>
     <body ng-app="chatApp">
         <!--nav here-->
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <!-- Just container for header brand -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="my-nav-items" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="/" class="navbar-brand">MEAN-Chat</a>
-                </div>
-                <!--container for nav links-->
-                <div class="collapse navbar-collapse" id="my-nav-items">
-                    <!-- nav links here-->
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/">Features</a></li>
-                        <li><a href="/app/chat">Chat</a></li>
-                        <li><a href="/">About</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/signup" ng-show="!isLoggedIn">Sign up</a></li><!-- todo:make this dynamic later with angular-->
-                        <li><a href="/login" ng-show="!isLoggedIn">Login</a></li><!-- todo:make this dynamic later with angular-->
-                        <li><a href="/logout" ng-show="isLoggedIn">Sign out</a></li><!-- todo:make this dynamic later with angular-->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                               role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Settings</a></li>
-                                <li><a href="#">Starred messages</a></li>
-                                <li><a href="#">Privacy</a></li>
-                                <li><a href="#">Notifications</a></li>
-                            </ul>
-                        </li><!-- todo:make this dynamic later with angular-->
-                    </ul><!-- end of personal navbar-->
-                </div><!-- end of nav items-->
-            </div><!-- navbar continer -->
-        </nav>
+        <my-nav is-logged-in="{{isLoggedIn}}" is-chat-open="{{isChatOpen}}"></my-nav>
         <div ng-view>
             <!-- angular routing contents here-->
         </div>
@@ -63,10 +25,6 @@
 
         <!-- The most awesome Socket.IO -->
         <script src="/socket.io/socket.io.js"></script>
-        <script>
-	        var socket = io.connect('http://localhost:3000');
-
-        </script>
         <!-- main app js file-->
         <script src="/app.js"></script>
 
@@ -74,13 +32,16 @@
         <script src="/landing/landing.controller.js"></script>
         <script src="/auth/signup/signup.controller.js"></script>
         <script src="/auth/login/login.controller.js"></script>
-        <script src="/chat/chat.controller.js"></script>
+
+        <!-- directives -->
+        <script src="/myNav.directive.js"></script>
+        <script src="/chat/chat.directive.js"></script>
 
         <!-- services -->
         <script src="/auth/auth.service.js"></script>
         <script src="/chat/chat.service.js"></script>
 
-
+        <!-- directives -->
 
     </body>
 </html>

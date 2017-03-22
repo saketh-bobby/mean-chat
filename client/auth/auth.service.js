@@ -7,10 +7,12 @@
 	authorization.$inject = ['$http', '$cookies', '$location','$window'];
 	function authorization($http, $cookies, $location,$window) {
 		return {
-			saveJwt: saveJwt,               //save jwt after login
+			getJwt:getJwt, /* retrieve jwt from cookie store*/
+			saveJwt: saveJwt,     //save jwt after login
 			postForSignup: postForSignup, //request for signup
 			postForLogin: postForLogin,    //request for login
-			isLoggedIn:isLoggedIn
+			isLoggedIn:isLoggedIn,
+			dropAuthCookie:dropAuthCookie
 		};
 
 		///////////
@@ -50,20 +52,29 @@
 			}
 		}
 
-		function _getJwt(){
+		function getJwt(){
 			return $cookies.get('authToken') || '';
 		}
 
 		function isLoggedIn(){
-			var jwtToken = _getJwt();
+			var jwtToken = getJwt();
 			if(jwtToken != ''){
 				var array = jwtToken.split('.');
 				var payload = array[1];
 				payload = $window.atob(payload);
 				payload = JSON.parse(payload);
-				return payload;
+				return payload.exp > Date.now() / 1000;
+			}
+			return false;
+		}
+
+		function dropAuthCookie(){
+			if($cookies.get('authToken')){
+				$cookies.remove('authToken');
 			}
 		}
+
+
 	}/* end of service*/
 
 })();

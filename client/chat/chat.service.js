@@ -5,27 +5,19 @@
 		.module('app.chat')
 		.factory('chatService', chatService);
 
-	chatService.$inject = ['$cookies','$http'];
+	chatService.$inject = ['$http'];
 
 	/* @ngInject */
-	function chatService($cookies,$http) {
+	function chatService($http) {
 		return {
-			getChatDetails: getChatDetails
+			getUserData: getUserData
 		};
 
 		////////////////
-
-		function getChatDetails() {
-			console.log($cookies.get('authToken'));
+		//
+		function getUserData() {
 			return $http
-				.get('/app/chat',{
-					headers:{
-						"Authorization":"Bearer "+$cookies.get('authToken')
-					}
-				})
-				.then(function(response){
-					console.log(response.status,response.data);
-				});
+				.get('/app/api/me');
 		}
 	}
 

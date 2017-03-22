@@ -6,8 +6,9 @@
 
 var app = require('../../server');
 var debug = require('debug')('mean-chat:server');
-var http = require('http');
 
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 /**
  * Get port from environment and store in Express.
  */
@@ -18,8 +19,13 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
-var server = http.createServer(app);
+/* Listen for socket connection */
+io.on('connection',function(socket){
+	socket.emit('connected',{data:"Hello World"});
+	socket.on('client-connected',function(data){
+		console.log(data);
+	});
+});
 
 /**
  * Listen on provided port, on all network interfaces.
