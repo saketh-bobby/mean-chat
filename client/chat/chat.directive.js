@@ -23,15 +23,21 @@
 		}
 	}
 
-	ControllerName.$inject = [];
+	ControllerName.$inject = ['socket','$timeout'];
 
 	/* @ngInject */
-	function ControllerName() {
+	function ControllerName(socket,$timeout) {
 		var vm = this;
-		console.log('here');
 		vm.sendText = function(){
 
 		};
+
+		socket.on('connected', function (data) {
+			console.log(data);
+		});
+
+		socket.emit('client-connected','success from client');
+		
 	}
 
 })();

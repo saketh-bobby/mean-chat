@@ -11,18 +11,21 @@
 	////////////
 	function runFunction($rootScope,$location,authorization) {
 		$rootScope.$on('$routeChangeStart',function(event,next){
-			$rootScope.isLoggedIn = authorization.isLoggedIn();
 			//	if protected routes
-			if ($location.path() == '/app/chat' && !authorization.isLoggedIn()) {
-				$location.path('/login');
+			if ($location.path() == '/app/chat') {
+				if (!authorization.isLoggedIn()) {
+					$location.path('/login');
+				} else{
+					$rootScope.$emit('state:chatopen',true);
+				}
+			} else{
+				$rootScope.$emit('state:chatopen',false);
 			}
 
 			if($location.path() == '/logout'){
 				authorization.dropAuthCookie();
-				$rootScope.isLoggedIn = false;
-				$setTimeout(function(){
-					$location.path('/');
-				},3000);
+				$rootScope.$emit('state:login',false);
+				$location.path('/');
 			}
 		});
 	}

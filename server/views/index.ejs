@@ -9,7 +9,7 @@
     </head>
     <body ng-app="chatApp">
         <!--nav here-->
-        <my-nav is-logged-in="{{isLoggedIn}}" is-chat-open="{{isChatOpen}}"></my-nav>
+        <my-nav></my-nav>
         <div ng-view>
             <!-- angular routing contents here-->
         </div>
@@ -38,10 +38,8 @@
         <script src="/chat/chat.directive.js"></script>
 
         <!-- services -->
+        <script src="/socket.service.js"></script>
         <script src="/auth/auth.service.js"></script>
-        <script src="/chat/chat.service.js"></script>
-
-        <!-- directives -->
 
     </body>
 </html>

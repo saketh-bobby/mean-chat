@@ -9,30 +9,32 @@
 
 	/* @ngInject */
 	function myNav() {
-		var directive = {
+		return {
 			bindToController: true,
 			controller: navCtrl,
 			controllerAs: 'vm',
-			templateUrl:'/myNav.html',
+			templateUrl: '/myNav.html',
 			link: link,
 			// restrict: 'A',
-			scope: {
-				isLoggedIn:'@',
-				isChatOpen:'@'
-			}
+			scope: {}
 		};
-		return directive;
 
 		function link(scope, element, attrs) {
-			console.log(attrs);
 		}
 	}
 
-	navCtrl.$inject = [];
+	navCtrl.$inject = ['$rootScope'];
 
 	/* @ngInject */
-	function navCtrl() {
+	function navCtrl($rootScope) {
 		var vm = this;
+		$rootScope.$on('state:login',function(event,isLoggedIn){
+			vm.isLoggedIn = isLoggedIn;
+		});
+		$rootScope.$on('state:chatopen',function(event,isChatOpen){
+			vm.isChatOpen = isChatOpen;
+		});
+
 	}
 
 })();

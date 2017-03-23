@@ -5,9 +5,9 @@
 		.module('app.auth.login', [])
 		.controller('LoginCtrl', LoginCtrl);
 
-	LoginCtrl.$inject = ['authorization', '$location', '$cookies'];
+	LoginCtrl.$inject = ['authorization', '$location', '$cookies','$rootScope'];
 
-	function LoginCtrl(authorization, $location, $cookies) {
+	function LoginCtrl(authorization, $location, $cookies,$rootScope) {
 		var vm = this;
 
 		vm.login = function () {
@@ -21,6 +21,7 @@
 					if (response.data.token) {
 						var jwtToken = response.data.token;
 						$cookies.put("authToken", jwtToken);
+						$rootScope.$emit('state:login',true);
 						$location.path("/");
 					}
 				})
